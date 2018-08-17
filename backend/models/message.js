@@ -1,5 +1,5 @@
-const mongoose     = require('mongoose'),
-Schema       = mongoose.Schema;
+const mongoose = require('mongoose'),
+	Schema = mongoose.Schema;
 
 const Message = new Schema({
 	// _id: String,
@@ -8,4 +8,4 @@ const Message = new Schema({
 })
 
 
-module.exports = mongoose.model('Message', Message);
+module.exports = mongoose.model('Message', Message)

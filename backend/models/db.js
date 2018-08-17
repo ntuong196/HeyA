@@ -1,9 +1,9 @@
 
 // db.js
 // Mongodb 3+
-const MongoClient = require('mongodb').MongoClient,
-    assert = require('assert'),
+const assert = require('assert'),
     mongoose = require('mongoose');
+    // message = require('./models/message');
 
 
 const dbUrl ='mongodb://steve:tuong123@ds229621.mlab.com:29621/irc'

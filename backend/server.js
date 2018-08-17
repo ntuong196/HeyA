@@ -7,7 +7,7 @@ const message = require('./models/message')
 
 app.use(bodyParser.urlencoded({extended: false}))
 
-// const port = process.env.PORT || 8080
+const port = process.env.PORT || 8080
 
 // app.use vs app.get
 app.use(bodyParser.json())
@@ -20,12 +20,22 @@ app.use((req, res, next) => {
 })
 
 const messages=[
-	{user:'Steve', text:'Second text'},
-	{user:'Kendric_', text:'Third text'}
+	{name:'Steve_', message:'Second text'},
+	{name:'Kendric_', message:'Third text'}
 ]
 
+// ROUTES FOR THE API
+// =============================================================================
+
+// create our router
 
 const api = express.Router()
+
+// api.use(function(req, res, next) {
+// 	// do logging
+// 	console.log('Something is happening.');
+// 	next();
+// });
 
 api.get('/messages',(req,res)=>{
 	res.json(messages)
@@ -37,9 +47,13 @@ api.get('/messages/:user', (req,res)=>{
 	res.json(result)
 })
 
-api.post('/message',(req,res)=>{
+
+
+api.post('/messages',(req,res)=>{
+	// console.log(req.body)
+	res.sendStatus(200)
 	messages.push(req.body)
-	res.json(req.body)
+	// res.json(req.body)
 })
 
 
@@ -49,6 +63,6 @@ app.use('/api',api)
 
 // START THE SERVER
 // =============================================================================
-const server = http.listen(3000,()=>{
+const server = http.listen(port,()=>{
 	console.log('Server is listening on port', server.address().port)
 })
