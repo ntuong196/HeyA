@@ -4,14 +4,7 @@ h1 {
   font-size: 250%;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-}
 
-.card > * {
-  width: 100%;
-}
 
 p {
 	width: 100%;	

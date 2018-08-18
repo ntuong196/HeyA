@@ -51,9 +51,9 @@ api.get('/messages/:user', (req,res)=>{
 
 api.post('/messages',(req,res)=>{
 	// console.log(req.body)
-	res.sendStatus(200)
+	// res.sendStatus(200)
 	messages.push(req.body)
-	// res.json(req.body)
+	res.json(req.body)
 })
 
 

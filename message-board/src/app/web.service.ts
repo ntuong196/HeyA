@@ -4,10 +4,21 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class WebService {
-	constructor(private http:Http){
+	BASE_URL = 'http://localhost:8080/api';
 
-	}
-	getMessages(){
-		return this.http.get('http://localhost:8080/api/messages/').toPromise();
-	}
+    messages = [];
+
+    constructor(private http: Http) {
+        this.getMessages();
+    }
+
+    async getMessages() {
+        var response = await this.http.get(this.BASE_URL + '/messages').toPromise();
+        this.messages = response.json();
+    }
+
+    async postMessage(message) {
+        var response = await this.http.post(this.BASE_URL + '/messages', message).toPromise();
+        this.messages.push(response.json());
+    }
 }

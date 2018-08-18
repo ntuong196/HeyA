@@ -7,10 +7,9 @@ import { NewMessageComponent } from './new-message.component';
   template: `
     <h1>Message Board</h1>
     <messages></messages>
+    <br>
     <new-message></new-message>
   `,
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'Dash Board';
-}
+export class AppComponent {}

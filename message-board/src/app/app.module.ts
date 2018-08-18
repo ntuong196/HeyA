@@ -12,6 +12,7 @@ import {MatButtonModule,
 	MatIconModule,
 	MatButtonToggleModule
 } from '@angular/material';
+import {FormsModule} from '@angular/forms';
 // import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 // import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
@@ -40,8 +41,8 @@ import { NewMessageComponent } from './new-message.component';
 	MatSnackBarModule, 
 	MatToolbarModule,
 	HttpModule,
-	MatIconModule
-	// FormsModule,
+	MatIconModule,
+	FormsModule
 	// ReactiveFormsModule,
 	],
 	entryComponents: [NewMessageComponent],
