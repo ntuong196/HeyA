@@ -1,10 +1,10 @@
-### HeyA
+## HeyA
 
-## Chat Application consits of: 
+# Chat Application consits of: 
 Back-end in NodeJS.
 Front-end in Angular 6.
 
-## Set up Instruction:
+# Set up Instruction:
 
 # Open Command Line in 'backend' folder
 
