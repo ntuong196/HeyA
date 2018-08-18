@@ -18,7 +18,7 @@ import {WebService} from './web.service'
         <mat-card-content>{{message.message}}</mat-card-content>
         </mat-card>
     </div>
-    <button mat-button>Send</button>
+    <button mat-button color="primary">Send</button>
     `
 })
 
