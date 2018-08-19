@@ -10,44 +10,69 @@ import {MatButtonModule,
 	MatSnackBarModule, 
 	MatToolbarModule,
 	MatIconModule,
-	MatButtonToggleModule
+	MatCheckboxModule,
+	MatMenuModule
 } from '@angular/material';
-import {FormsModule} from '@angular/forms';
-// import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+import { RouterModule, Routes } from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpModule } from '@angular/http';
 // import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 /*
 // Righteous import
 */
 import { AppComponent } from './app.component';
-import { MessagesComponent } from './messages.component';
 import {WebService} from './web.service';
-import { HttpModule } from '@angular/http';
+import { MessagesComponent } from './messages/messages.component';
 import { NewMessageComponent } from './new-message.component';
+import { NavComponent } from './nav/nav.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import {AuthService} from './auth.service';
+import { LoginComponent } from './login/login.component';
+
+
+const routes: Routes = [
+  {path: '', component: MessagesComponent},
+  {path: 'inbox', component: HomeComponent},
+  {path: 'messages', component: MessagesComponent},
+  {path: 'messages/:name', component: MessagesComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent},
+];
+
+
+
 
 @NgModule({
 	declarations: [
 	AppComponent, 
 	MessagesComponent,
-	NewMessageComponent
+	NewMessageComponent,
+	NavComponent,
+	HomeComponent,
+	RegisterComponent,
+	LoginComponent
 	],
 	imports: [
 	BrowserModule, 
 	BrowserAnimationsModule,
 	MatButtonModule,
-  	MatButtonToggleModule,
 	MatCardModule, 
 	MatInputModule, 
 	MatSnackBarModule, 
 	MatToolbarModule,
 	HttpModule,
 	MatIconModule,
-	FormsModule
-	// ReactiveFormsModule,
+	FormsModule,
+	MatCheckboxModule,
+	MatMenuModule,
+	RouterModule.forRoot(routes),
+	ReactiveFormsModule
 	],
-	entryComponents: [NewMessageComponent],
-	providers: [WebService],
-	bootstrap: [AppComponent, NewMessageComponent]
+	providers: [WebService, AuthService],
+	bootstrap: [AppComponent]
 
 })
 export class AppModule { }

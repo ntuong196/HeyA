@@ -1,0 +1,25 @@
+<div *ngFor="let message of webService.messages | async">
+        <mat-card class="card">
+        <mat-card-title [routerLink]="['/messages', message.name]" style="cursor: pointer">{{message.name}}
+  		<mat-checkbox style="float: right;"></mat-checkbox>
+
+        <!-- <button mat-button style="float: right;" (click)="like=!like">
+        	<i class="material-icons" *ngIf="like">check_box</i>
+        	<i class="material-icons" *ngIf="!like">check_box_outline_blank</i>
+        </button> -->
+
+        <button mat-button style="float: right;" [matMenuTriggerFor]="menu"> 
+        <mat-icon (click)="changeIcon('check_box')" matSuffix>
+        expand_more
+        </mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>Yes</button>
+          <button mat-menu-item>No</button>
+        </mat-menu>
+
+        </mat-card-title>
+        <mat-card-content>{{message.message}}</mat-card-content>
+        </mat-card>
+    </div>
