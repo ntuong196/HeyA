@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { WebService } from './web.service'
+import { AuthService } from './auth.service'
 
 @Component({
     selector: 'new-message',
@@ -33,9 +34,9 @@ import { WebService } from './web.service'
     styleUrls: ['./app.component.css']
 })
 export class NewMessageComponent {
-    constructor(private webService : WebService) {}
+    constructor(private webService : WebService, private auth: AuthService) {}
     message = {
-        name: "",
+        name: this.auth.name,
         message: ""
     }
 

@@ -19,15 +19,15 @@ app.use(bodyParser.json())
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
 })
 
 const messages=[
-	{name:'Steve_', message:'Second text'},
-	{name:'Kendric_', message:'Third text'}
+	{name:'Steve_', message:'HeyA, How are you doing?'},
+	{name:'Nat_', message:'Hi, we met in uni yesterday.'}
 ]
-const users = [{firstName: 'Steve_', email: 'ntuong196@gmail.com', password: 'lit', id: 0}]
+const users = [{firstName: 'Steve_', email: 'st@qut.au', password: 'lit', id: 0}]
 // ROUTES FOR THE API
 // =============================================================================
 
@@ -53,6 +53,19 @@ api.get('/messages/:user', (req,res)=>{
 })
 
 
+api.get('/users/me', checkAuthenticated, (req,res) => {
+    res.json(users[req.user]);
+})
+
+api.post('/users/me', checkAuthenticated, (req,res) => {
+    var user = users[req.user];
+
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+
+    res.json(user);
+})
+
 
 api.post('/messages',(req,res)=>{
 	// console.log(req.body)
@@ -62,7 +75,7 @@ api.post('/messages',(req,res)=>{
 })
 
 auth.post('/login', jsonParser, (req, res) => {
-    var user = users.find(user => user.name == req.body.name)
+    var user = users.find(user => user.email == req.body.email)
 
     if (!user) sendAuthError(res)
 
@@ -80,12 +93,28 @@ auth.post('/register',jsonParser, (req, res) => {
 })
 
 function sendToken(user, res) {
-    var token = jwt.sign(user.id, '123');
-    res.json({ firstName: user.firstName, token });
+    var token = jwt.sign(user.id, '256')
+    res.json({ firstName: user.firstName, token })
 }
 
 function sendAuthError(res) {
     return res.json({ success: false, message: 'email or password incorrect' });
+}
+
+function checkAuthenticated(req, res, next) {
+    if(!req.header('authorization'))
+        return res.status(401).send({message: 'Unauthorized requested. Missing authentication header'});
+
+    var token = req.header('authorization').split(' ')[1]
+
+    var payload = jwt.decode(token, '256')
+
+    if(!payload)
+        return res.status(401).send({message: 'Unauthorized requested. Authentication header invalid'});
+
+    req.user = payload
+
+    next()
 }
 
 // REGISTER OUR ROUTES -------------------------------

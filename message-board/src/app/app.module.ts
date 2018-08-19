@@ -31,15 +31,17 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import {AuthService} from './auth.service';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
-  {path: '', component: MessagesComponent},
+  {path: '', component: LoginComponent},
   {path: 'inbox', component: HomeComponent},
   {path: 'messages', component: MessagesComponent},
   {path: 'messages/:name', component: MessagesComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'user', component: UserComponent}
 ];
 
 
@@ -53,7 +55,8 @@ const routes: Routes = [
 	NavComponent,
 	HomeComponent,
 	RegisterComponent,
-	LoginComponent
+	LoginComponent,
+	UserComponent
 	],
 	imports: [
 	BrowserModule, 

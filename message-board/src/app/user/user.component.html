@@ -1,0 +1,24 @@
+<mat-card class="card">
+            <mat-form-field>
+                <input matInput [(ngModel)]="model.firstName" placeholder="First Name">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="model.lastName" placeholder="Last Name">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput [(ngModel)]="model.email" placeholder="Email">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="password" [(ngModel)]="model.password" placeholder="Password">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Twitter Screen Name">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Good Read Name">
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="saveUser(model)">Update Account</button>
+            <br>
+            <br>
+            <button mat-raised-button color="primary" (click)="saveUser(model)">View Profile</button>
+        </mat-card>

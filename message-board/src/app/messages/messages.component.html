@@ -1,7 +1,8 @@
 <div *ngFor="let message of webService.messages | async">
         <mat-card class="card">
-        <mat-card-title [routerLink]="['/messages', message.name]" style="cursor: pointer">{{message.name}}
-  		<mat-checkbox style="float: right;"></mat-checkbox>
+        <mat-card-title >
+            <a style="cursor: pointer">{{message.name}}</a>
+  		<!-- <mat-checkbox style="float: right;"></mat-checkbox> -->
 
         <!-- <button mat-button style="float: right;" (click)="like=!like">
         	<i class="material-icons" *ngIf="like">check_box</i>
@@ -15,8 +16,8 @@
         </button>
 
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>Yes</button>
-          <button mat-menu-item>No</button>
+          <button [routerLink]="['/messages', message.name]" mat-menu-item>Accept</button>
+          <button mat-menu-item>Decline</button>
         </mat-menu>
 
         </mat-card-title>

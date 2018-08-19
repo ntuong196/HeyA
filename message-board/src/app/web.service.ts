@@ -1,12 +1,13 @@
-import {Http} from '@angular/http';
-import { Injectable } from '@angular/core';
-// import 'rxjs/add/operator/toPromise';
-import { MatSnackBar } from '@angular/material';
-import { Observable, Subject } from 'rxjs';
+import {Http} from '@angular/http'
+import { Injectable } from '@angular/core'
+import { MatSnackBar } from '@angular/material'
+import { Observable, Subject } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { AuthService } from './auth.service'
 
 @Injectable()
 export class WebService {
-	BASE_URL = 'http://localhost:8080/api';
+	BASE_URL = 'http://localhost:8080/api'
 
     
     private messageStore = [];
@@ -17,7 +18,7 @@ export class WebService {
     messages = this.messageSubjet.asObservable();
 
 
-    constructor(private http: Http, private sb: MatSnackBar) {
+    constructor(private http: Http, private sb: MatSnackBar,  private auth: AuthService) {
         this.getMessages(null);
     }
 
@@ -40,6 +41,12 @@ export class WebService {
             this.handleError("Unable to post message");
         }
 
+    }
+    getUser() {
+        return this.http.get(this.BASE_URL + '/users/me', this.auth.tokenHeader).pipe(map(res => res.json()));
+    }
+    saveUser(userData) {
+        return this.http.post(this.BASE_URL + '/users/me', userData, this.auth.tokenHeader).pipe(map(res => res.json()));
     }
 
     private handleError(error) {

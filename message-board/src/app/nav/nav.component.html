@@ -7,6 +7,6 @@
     <span style="flex: 1 1 auto"></span>
     <button mat-button *ngIf="!auth.isAuthenticated" routerLink="/login" >Login</button>
     <!-- <button mat-button *ngIf="!auth.isAuthenticated" routerLink="/register" >Register</button> -->
-    <button mat-button *ngIf="auth.isAuthenticated" routerLink="/" >Welcome <a style="font: bold;">{{auth.name}}</a></button>
+    <button mat-button *ngIf="auth.isAuthenticated" routerLink="/user" >Welcome <a style="font: bold;">{{auth.name}}</a></button>
     <button *ngIf="auth.isAuthenticated" mat-button routerLink="/" (click)="auth.logout()" >Log Out</button>   
 </mat-toolbar>
