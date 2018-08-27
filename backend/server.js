@@ -28,9 +28,10 @@ app.use(bodyParser.json())
 
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    next();
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+    next()
 })
 
 const messages=[
@@ -84,6 +85,15 @@ api.post('/messages',(req,res)=>{
 	res.json(req.body)
 })
 
+api.delete('/messages',(req,res,err)=>{
+	// console.log(req.body)
+	// res.sendStatus(200)
+  const index = messages.indexOf(req)
+	messages.splice(index,1)
+	res.json(messages)
+  console.log(err)
+})
+
 
 // DATABASE CONNECTION HERE
 // ==========================================================
@@ -92,7 +102,7 @@ api.route('/bears')
 
     // create a bear (accessed at POST http://localhost:8080/bears)
     .post(function(req, res) {
-        
+
         var bear = new Bear();      // create a new instance of the Bear model
         bear.name = req.body.name;  // set the bears name (comes from the request)
 
@@ -103,7 +113,7 @@ api.route('/bears')
             res.json({ message: 'Bear created!' });
         });
 
-        
+
     })
 
     // get all the bears (accessed at GET http://localhost:8080/api/bears)

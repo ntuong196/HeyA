@@ -9,13 +9,13 @@ import { AuthService } from './auth.service'
 export class WebService {
 	BASE_URL = 'http://localhost:8080/api'
 
-    
-    private messageStore = [];
+
+    private messageStore = []
 
     //  messageSubjet = new Subject();
-    private messageSubjet = new Subject();
-    
-    messages = this.messageSubjet.asObservable();
+    private messageSubjet = new Subject()
+
+    messages = this.messageSubjet.asObservable()
 
 
     constructor(private http: Http, private sb: MatSnackBar,  private auth: AuthService) {
@@ -23,31 +23,46 @@ export class WebService {
     }
 
     getMessages(user) {
-        user = (user) ? '/' + user : '';
+        user = (user) ? '/' + user : ''
         this.http.get(this.BASE_URL + '/messages' + user).subscribe(response => {
-            this.messageStore = response.json();
-            this.messageSubjet.next(this.messageStore);
+            this.messageStore = response.json()
+            this.messageSubjet.next(this.messageStore)
         }, error => {
-            this.handleError("Unable to get messages");
+            this.handleError("Unable to get messages")
         });
     }
 
     async postMessage(message) {
         try {
-            var response = await this.http.post(this.BASE_URL + '/messages', message).toPromise();
-            this.messageStore.push(response.json());
-            this.messageSubjet.next(this.messageStore);
+            var response = await this.http.post(this.BASE_URL + '/messages', message).toPromise()
+            this.messageStore.push(response.json())
+            this.messageSubjet.next(this.messageStore)
         } catch (error) {
-            this.handleError("Unable to post message");
+            this.handleError("Unable to post message")
         }
 
     }
+		async deleteMessage(message) {
+        try {
+					var response = await this.http.delete(this.BASE_URL + '/messages', message).toPromise()
+						var index = this.messageStore.indexOf(message)
+            this.messageStore.splice(index, 1)
+            this.messageSubjet.next(this.messageStore)
+        } catch (error) {
+					console.log(error)
+            this.handleError("Unable to delete message")
+        }
+    }
     getUser() {
-        return this.http.get(this.BASE_URL + '/users/me', this.auth.tokenHeader).pipe(map(res => res.json()));
+        return this.http.get(this.BASE_URL + '/users/me', this.auth.tokenHeader).pipe(map(res => res.extractData)
     }
+		private extractData(res: Response) {
+    	return res.text() ? res.json() : {}
+		}
     saveUser(userData) {
-        return this.http.post(this.BASE_URL + '/users/me', userData, this.auth.tokenHeader).pipe(map(res => res.json()));
+        return this.http.post(this.BASE_URL + '/users/me', userData, this.auth.tokenHeader).pipe(map(res => res.json()))
     }
+
 
     private handleError(error) {
         console.error(error);
