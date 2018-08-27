@@ -4,10 +4,7 @@
             <a style="cursor: pointer">{{message.name}}</a>
   		<!-- <mat-checkbox style="float: right;"></mat-checkbox> -->
 
-        <!-- <button mat-button style="float: right;" (click)="like=!like">
-        	<i class="material-icons" *ngIf="like">check_box</i>
-        	<i class="material-icons" *ngIf="!like">check_box_outline_blank</i>
-        </button> -->
+        
 
         <button mat-button style="float: right;" [matMenuTriggerFor]="menu"> 
         <mat-icon (click)="changeIcon('check_box')" matSuffix>

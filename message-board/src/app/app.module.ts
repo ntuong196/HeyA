@@ -13,10 +13,12 @@ import {MatButtonModule,
 	MatCheckboxModule,
 	MatMenuModule
 } from '@angular/material';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { RouterModule, Routes } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AgmCoreModule } from '@agm/core';
 // import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 /*
@@ -32,6 +34,7 @@ import { RegisterComponent } from './register/register.component';
 import {AuthService} from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
+import { MapComponent } from './map/map.component';
 
 
 const routes: Routes = [
@@ -41,7 +44,8 @@ const routes: Routes = [
   {path: 'messages/:name', component: MessagesComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'user', component: UserComponent}
+  {path: 'user', component: UserComponent},
+  {path: 'scanner', component: MapComponent}
 ];
 
 
@@ -56,7 +60,8 @@ const routes: Routes = [
 	HomeComponent,
 	RegisterComponent,
 	LoginComponent,
-	UserComponent
+	UserComponent,
+	MapComponent
 	],
 	imports: [
 	BrowserModule, 
@@ -72,7 +77,11 @@ const routes: Routes = [
 	MatCheckboxModule,
 	MatMenuModule,
 	RouterModule.forRoot(routes),
-	ReactiveFormsModule
+	ReactiveFormsModule,
+	MatChipsModule,
+	AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAK8MrWHM4riyD4HJ6M5pabVAs09scuLBU'
+    })
 	],
 	providers: [WebService, AuthService],
 	bootstrap: [AppComponent]

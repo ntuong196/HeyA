@@ -8,7 +8,6 @@ body{
   float: right;
 }
 .card {
-	margin-top: 8px;
   display: flex;
   flex-direction: column;
 }
