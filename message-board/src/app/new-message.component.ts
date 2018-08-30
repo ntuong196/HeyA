@@ -4,12 +4,12 @@ import { AuthService } from './auth.service'
 
 @Component({
     selector: 'new-message',
-    template: 
+    template:
     `
         <mat-card class="card">
             <mat-card-content>
-                
-                  <mat-form-field appearance="outline">
+
+                  <mat-form-field *ngIf="!auth.isAuthenticated" appearance="outline">
                     <mat-label>Name</mat-label>
                     <input matInput [(ngModel)]="message.name" placeholder="John Doe">
                     <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
@@ -21,7 +21,7 @@ import { AuthService } from './auth.service'
                     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                     <mat-hint>Give a proper messages</mat-hint>
                   </mat-form-field>
-                
+
                 <mat-card-actions class="post_button">
                     <button (click)="post()" mat-stroked-button color="primary">POST</button>
                 </mat-card-actions>

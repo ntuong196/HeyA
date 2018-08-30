@@ -4,17 +4,18 @@
             <a style="cursor: pointer">{{message.name}}</a>
   		<!-- <mat-checkbox style="float: right;"></mat-checkbox> -->
 
-        
 
-        <button mat-button style="float: right;" [matMenuTriggerFor]="menu"> 
-        <mat-icon (click)="changeIcon('check_box')" matSuffix>
+
+        <button mat-button style="float: right;" [matMenuTriggerFor]="menu">
+        <mat-icon matSuffix>
         expand_more
         </mat-icon>
         </button>
 
         <mat-menu #menu="matMenu">
-          <button [routerLink]="['/messages', message.name]" mat-menu-item>Accept</button>
-          <button mat-menu-item>Decline</button>
+          <button [routerLink]="['/messages', message.name]" mat-menu-item>View Profile</button>
+          <button (click)="delete()" mat-menu-item>Delete Message</button>
+          <!-- <button mat-menu-item>Delete Message</button> -->
         </mat-menu>
 
         </mat-card-title>
